@@ -3,6 +3,7 @@
   "use strict";
   const { $, $$, reduce, el, AR, shuffled } = window.MARJI_UTIL;
   const G = window.MARJI_GUIDE;
+  const SMALL = matchMedia("(max-width: 650px)").matches; // على الجوال نعرض بطاقات أقل أولًا
   const scrollTo = (node) => node && node.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 
   /* ============================================================
@@ -141,7 +142,7 @@
     empty: "#mrRegEmpty",
     count: "#mrRegCount",
     chips: "#mrRegChips",
-    first: 6,
+    first: SMALL ? 4 : 6,
     unit: "موضوعًا",
     moreText: "عرض بقية الموضوعات ↓",
     lessText: "عرض موضوعات أقل ↑",
@@ -201,7 +202,7 @@
     empty: "#pvEmpty",
     count: "#pvCount",
     chips: "#pvChips",
-    first: 9,
+    first: SMALL ? 5 : 9,
     unit: "بندًا",
     moreText: "عرض بقية البنود ↓",
     lessText: "عرض بنود أقل ↑",
