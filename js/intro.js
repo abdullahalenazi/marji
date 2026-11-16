@@ -46,52 +46,32 @@
   });
   const fills = $$("i", track);
 
-  /* ---------- الصوت ---------- */
+  /* ---------- الصوت: موسيقى تفاعلية (js/music.js) + مكان جاهز للتعليق الصوتي ---------- */
   let ctx = null,
-    master = null,
+    music = null,
     musicOn = false,
     voice = null,
     voiceReady = false;
-  function buildMusic() {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    ctx = new AC();
-    master = ctx.createGain();
-    master.gain.value = 0;
-    const lp = ctx.createBiquadFilter();
-    lp.type = "lowpass";
-    lp.frequency.value = 900;
-    master.connect(lp).connect(ctx.destination);
-    // وسادة هادئة: لا ماجور مفتوح + نبض بطيء
-    [110, 164.81, 220, 277.18, 329.63].forEach((f, n) => {
-      const o = ctx.createOscillator(),
-        g = ctx.createGain(),
-        l = ctx.createOscillator(),
-        lg = ctx.createGain();
-      o.type = n % 2 ? "triangle" : "sine";
-      o.frequency.value = f;
-      o.detune.value = (n - 2) * 4;
-      g.gain.value = 0.16 / (n + 1.4);
-      l.frequency.value = 0.07 + n * 0.031;
-      lg.gain.value = g.gain.value * 0.55;
-      l.connect(lg).connect(g.gain);
-      o.connect(g).connect(master);
-      o.start();
-      l.start();
-    });
-    return true;
-  }
+  const musicLevel = () => (voiceReady ? 0.22 : 0.5);
   function setMusic(on) {
     try {
-      if (on && !ctx && !buildMusic()) return;
+      if (on && !ctx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC || !window.MARJI_MUSIC) return;
+        ctx = new AC();
+        music = window.MARJI_MUSIC.engine(ctx);
+        if (idx >= 0) music.scene(idx);
+      }
       if (!ctx) return;
       if (on) ctx.resume();
       musicOn = on;
-      master.gain.cancelScheduledValues(ctx.currentTime);
-      master.gain.linearRampToValueAtTime(on ? (voiceReady ? 0.16 : 0.34) : 0, ctx.currentTime + (on ? 1.6 : 0.5));
+      music.setLevel(on ? musicLevel() : 0, on ? 1.6 : 0.5);
+      if (!on) setTimeout(() => !musicOn && ctx.state === "running" && ctx.suspend(), 900);
       soundBtn.setAttribute("aria-pressed", String(on));
+      soundBtn.textContent = on ? "♪ الموسيقى تعمل" : "♪ الموسيقى متوقفة";
     } catch (e) {}
   }
+  const live = () => musicOn && music;
   soundBtn.addEventListener("click", () => setMusic(!musicOn));
   function loadVoice() {
     if (voice || !CFG.voiceFile) return;
@@ -150,6 +130,7 @@
     fills.forEach((f, k) => (f.style.width = k < idx ? "100%" : "0%"));
     setPlaying(true);
     syncVoice(true);
+    if (live()) music.scene(idx);
   }
   function gate() {
     idx = -1;
@@ -164,6 +145,7 @@
     pauseBtn.textContent = p ? "❚❚" : "▶";
     pauseBtn.setAttribute("aria-label", p ? "إيقاف مؤقت" : "تشغيل");
     syncVoice(false);
+    if (live() && idx >= 0) music.duck(!p);
   }
   pauseBtn.addEventListener("click", () => {
     if (!playing && idx === CFG.scenes.length - 1 && elapsed >= CFG.scenes[idx].duration) return go(0);
@@ -178,7 +160,14 @@
   $("#introReplay").addEventListener("click", () => go(0));
   $("#introSkip").addEventListener("click", () => close());
   $$("[data-intro-skip]", root).forEach((b) => b.addEventListener("click", () => close()));
-  $$("[data-go]", root).forEach((b) => b.addEventListener("click", () => close(b.dataset.go)));
+  $$("[data-go]", root).forEach((b, i) => {
+    b.addEventListener("pointerenter", () => live() && music.card(i));
+    b.addEventListener("focus", () => live() && music.card(i));
+    b.addEventListener("click", () => {
+      if (live()) music.choose(i);
+      setTimeout(() => close(b.dataset.go), live() ? 260 : 0);
+    });
+  });
 
   /* ---------- الحلقة الرئيسية ---------- */
   function frame(t) {
@@ -220,9 +209,21 @@
   let ringHover = false;
   ring.addEventListener("pointerenter", () => (ringHover = true));
   ring.addEventListener("pointerleave", () => (ringHover = false));
+  let pmX = 0,
+    pmY = 0,
+    pmT = 0;
   root.addEventListener(
     "pointermove",
     (e) => {
+      if (live() && idx >= 0) {
+        const now = performance.now(),
+          dt = Math.max(16, now - pmT);
+        const speed = (Math.hypot(e.clientX - pmX, e.clientY - pmY) / dt) * 1000;
+        pmX = e.clientX;
+        pmY = e.clientY;
+        pmT = now;
+        music.pointer(e.clientX / innerWidth, e.clientY / innerHeight, playing ? speed : 0);
+      }
       if (dragging) {
         const dx = e.clientX - lastX,
           dy = e.clientY - lastY;
