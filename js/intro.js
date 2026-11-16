@@ -1,4 +1,4 @@
-/* مَرْجِع — الافتتاحية التفاعلية: مشاهد ثلاثية الأبعاد + تعليق متزامن + موسيقى مولّدة + مكان جاهز للتعليق الصوتي */
+/* مَرْجِع — الافتتاحية التفاعلية: مشاهد ثلاثية الأبعاد + نص متزامن (صامتة) + مكان اختياري لتعليق صوتي مسجّل */
 (() => {
   "use strict";
   const { $, $$, store, reduce } = window.MARJI_UTIL;
@@ -10,7 +10,6 @@
     controls = $("#introControls"),
     track = $("#introTrack"),
     pauseBtn = $("#introPause"),
-    soundBtn = $("#introSound"),
     ring = $("#introRing");
   const scenes = $$(".scene", root);
   const sceneEl = (id) => scenes.find((s) => s.dataset.scene === id);
@@ -46,33 +45,11 @@
   });
   const fills = $$("i", track);
 
-  /* ---------- الصوت: موسيقى تفاعلية (js/music.js) + مكان جاهز للتعليق الصوتي ---------- */
-  let ctx = null,
-    music = null,
-    musicOn = false,
-    voice = null,
+  /* ---------- الصوت ---------- */
+  // العرض صامت: لا موسيقى ولا مؤثرات. يبقى فقط مكان اختياري لتعليق صوتي مسجّل
+  // (voiceFile في data/content.js، وهو فارغ افتراضيًا فلا يصدر أي صوت).
+  let voice = null,
     voiceReady = false;
-  const musicLevel = () => (voiceReady ? 0.22 : 0.5);
-  function setMusic(on) {
-    try {
-      if (on && !ctx) {
-        const AC = window.AudioContext || window.webkitAudioContext;
-        if (!AC || !window.MARJI_MUSIC) return;
-        ctx = new AC();
-        music = window.MARJI_MUSIC.engine(ctx);
-        if (idx >= 0) music.scene(idx);
-      }
-      if (!ctx) return;
-      if (on) ctx.resume();
-      musicOn = on;
-      music.setLevel(on ? musicLevel() : 0, on ? 1.6 : 0.5);
-      if (!on) setTimeout(() => !musicOn && ctx.state === "running" && ctx.suspend(), 900);
-      soundBtn.setAttribute("aria-pressed", String(on));
-      soundBtn.textContent = on ? "♪ الموسيقى تعمل" : "♪ الموسيقى متوقفة";
-    } catch (e) {}
-  }
-  const live = () => musicOn && music;
-  soundBtn.addEventListener("click", () => setMusic(!musicOn));
   function loadVoice() {
     if (voice || !CFG.voiceFile) return;
     try {
@@ -130,7 +107,6 @@
     fills.forEach((f, k) => (f.style.width = k < idx ? "100%" : "0%"));
     setPlaying(true);
     syncVoice(true);
-    if (live()) music.scene(idx);
   }
   function gate() {
     idx = -1;
@@ -145,7 +121,6 @@
     pauseBtn.textContent = p ? "❚❚" : "▶";
     pauseBtn.setAttribute("aria-label", p ? "إيقاف مؤقت" : "تشغيل");
     syncVoice(false);
-    if (live() && idx >= 0) music.duck(!p);
   }
   pauseBtn.addEventListener("click", () => {
     if (!playing && idx === CFG.scenes.length - 1 && elapsed >= CFG.scenes[idx].duration) return go(0);
@@ -154,20 +129,12 @@
   $("#introPrev").addEventListener("click", () => go(Math.max(0, idx - 1)));
   $("#introNext").addEventListener("click", () => (idx >= CFG.scenes.length - 1 ? close() : go(idx + 1)));
   $("#introStart").addEventListener("click", () => {
-    setMusic(true);
     go(0);
   });
   $("#introReplay").addEventListener("click", () => go(0));
   $("#introSkip").addEventListener("click", () => close());
   $$("[data-intro-skip]", root).forEach((b) => b.addEventListener("click", () => close()));
-  $$("[data-go]", root).forEach((b, i) => {
-    b.addEventListener("pointerenter", () => live() && music.card(i));
-    b.addEventListener("focus", () => live() && music.card(i));
-    b.addEventListener("click", () => {
-      if (live()) music.choose(i);
-      setTimeout(() => close(b.dataset.go), live() ? 260 : 0);
-    });
-  });
+  $$("[data-go]", root).forEach((b) => b.addEventListener("click", () => close(b.dataset.go)));
 
   /* ---------- الحلقة الرئيسية ---------- */
   function frame(t) {
@@ -209,21 +176,9 @@
   let ringHover = false;
   ring.addEventListener("pointerenter", () => (ringHover = true));
   ring.addEventListener("pointerleave", () => (ringHover = false));
-  let pmX = 0,
-    pmY = 0,
-    pmT = 0;
   root.addEventListener(
     "pointermove",
     (e) => {
-      if (live() && idx >= 0) {
-        const now = performance.now(),
-          dt = Math.max(16, now - pmT);
-        const speed = (Math.hypot(e.clientX - pmX, e.clientY - pmY) / dt) * 1000;
-        pmX = e.clientX;
-        pmY = e.clientY;
-        pmT = now;
-        music.pointer(e.clientX / innerWidth, e.clientY / innerHeight, playing ? speed : 0);
-      }
       if (dragging) {
         const dx = e.clientX - lastX,
           dy = e.clientY - lastY;
@@ -317,7 +272,6 @@
     open = false;
     cancelAnimationFrame(raf);
     setPlaying(false);
-    setMusic(false);
     store.set(SEEN, 1);
     $$("body > *").forEach((n) => (n.inert = false));
     document.body.classList.remove("intro-open");
