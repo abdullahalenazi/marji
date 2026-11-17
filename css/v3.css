@@ -1,0 +1,542 @@
+/* مَرْجِع — أنماط تحديث ١٧ نوفمبر: الحالة الموثقة، المراجعات السريعة، قياس الأثر */
+
+/* ---------- الحالة الموثقة ---------- */
+.proof-band {
+  background: linear-gradient(120deg, #071b38, #0a3155 70%, #08233e);
+  color: #fff;
+  padding: 64px 0;
+  overflow: hidden;
+}
+.proof-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 44px;
+  align-items: center;
+}
+.proof-layout > * {
+  min-width: 0;
+}
+.proof-eyebrow {
+  display: inline-block;
+  color: #62f1df;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.proof-copy h2 {
+  margin: 0 0 14px;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.35;
+}
+.proof-copy p {
+  margin: 0;
+  color: #c8dbe6;
+  font-size: 17px;
+  line-height: 1.9;
+}
+.proof-copy strong {
+  color: #fff;
+}
+.proof-case {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(98, 241, 223, 0.28);
+  border-radius: 22px;
+  padding: 26px;
+  backdrop-filter: blur(8px);
+}
+.proof-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(11, 198, 178, 0.16);
+  color: #62f1df;
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.proof-case h3 {
+  margin: 14px 0 8px;
+  font-size: 22px;
+}
+.proof-case > p {
+  margin: 0 0 16px;
+  color: #d7e6ee;
+  line-height: 1.85;
+}
+.proof-lesson {
+  display: grid;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+.proof-lesson strong {
+  color: #62f1df;
+  font-size: 14px;
+}
+.proof-lesson span {
+  color: #e8f1f5;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.proof-case .btn {
+  width: 100%;
+}
+.proof-case small {
+  display: block;
+  margin-top: 12px;
+  color: #9fc3d2;
+  font-size: 13px;
+}
+
+/* نافذة الحالة */
+.case-dialog .case-sec {
+  border-top: 1px solid var(--line);
+  padding: 14px 0 4px;
+}
+.case-dialog .case-sec h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  color: var(--navy);
+}
+.case-dialog .case-sec p,
+.case-dialog .case-sec li {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.9;
+  font-size: 15.5px;
+}
+.case-dialog .case-sec ol {
+  margin: 0;
+  padding-inline-start: 20px;
+}
+.case-dialog .case-cite {
+  margin-top: 14px;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.case-dialog .case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ---------- المراجعات السريعة داخل «تجنّب المخالفة» ---------- */
+.qc-block {
+  margin: 6px 0 34px;
+  scroll-margin-top: 110px;
+}
+.qc-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.qc-title h3 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--navy);
+}
+.qc-title p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+.qc-shell {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.qc-shell > * {
+  min-width: 0;
+}
+.qc-tabs {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.qc-tabs button {
+  text-align: right;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.qc-tabs button:hover {
+  border-color: var(--turq);
+}
+.qc-tabs button[aria-pressed="true"] {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.qc-spot {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.qc-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  background: rgba(11, 198, 178, 0.14);
+  color: #087f74;
+}
+.qc-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #087f74;
+  font-weight: 800;
+  font-size: 13.5px;
+}
+.qc-meta b {
+  color: var(--muted);
+  font-weight: 700;
+}
+.qc-spot h4 {
+  margin: 4px 0 12px;
+  font-size: 21px;
+  color: var(--navy);
+}
+.qc-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.qc-field {
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.qc-field small {
+  display: block;
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.qc-field p {
+  margin: 0;
+  line-height: 1.85;
+  font-size: 15px;
+}
+.qc-risk {
+  background: #fff4f1;
+}
+.qc-risk small {
+  color: #b5462e;
+}
+.qc-act {
+  background: #ecfaf7;
+}
+.qc-act small {
+  color: #087f74;
+}
+.qc-check {
+  margin-top: 12px;
+  display: grid;
+  gap: 2px;
+  border: 1px dashed #9fd9d1;
+  border-radius: 14px;
+  padding: 10px 14px;
+}
+.qc-check strong {
+  color: var(--navy);
+  font-size: 14px;
+}
+.qc-check span {
+  font-size: 15px;
+  line-height: 1.8;
+}
+.qc-source {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.pv-detail-title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: var(--navy);
+}
+
+/* ---------- قياس أثر التعلّم ---------- */
+.as-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: start;
+}
+.as-layout > * {
+  min-width: 0;
+}
+.as-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.as-step {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.as-step span {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--navy);
+  font-weight: 900;
+}
+.as-step b {
+  display: block;
+  color: var(--navy);
+}
+.as-step small {
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.as-step.is-on {
+  border-color: var(--turq);
+  box-shadow: 0 10px 26px rgba(11, 198, 178, 0.16);
+}
+.as-step.is-on span {
+  background: var(--turq);
+  color: #04243b;
+}
+.as-step.is-done span {
+  background: var(--navy);
+  color: #62f1df;
+}
+.as-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+.as-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #087f74;
+  margin-bottom: 8px;
+}
+.as-head b {
+  color: var(--muted);
+  font-weight: 700;
+}
+.as-panel h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: var(--navy);
+  line-height: 1.6;
+}
+.as-panel p {
+  color: var(--muted);
+  line-height: 1.85;
+  margin: 0 0 10px;
+}
+.as-answers {
+  display: grid;
+  gap: 9px;
+}
+.as-answers label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 11px 13px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.as-answers label:hover {
+  border-color: var(--turq);
+}
+.as-answers input {
+  margin-top: 6px;
+  accent-color: var(--turq);
+}
+.as-answers label:has(input:checked) {
+  border-color: var(--turq);
+  background: #ecfaf7;
+}
+.as-learn {
+  margin: 0;
+  padding-inline-start: 20px;
+  display: grid;
+  gap: 8px;
+  line-height: 1.85;
+}
+.as-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.as-scores div {
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+}
+.as-scores strong {
+  display: block;
+  font-size: 34px;
+  color: var(--navy);
+  line-height: 1.3;
+}
+.as-scores span {
+  color: var(--muted);
+  font-size: 14px;
+}
+.as-verdict {
+  color: var(--navy) !important;
+  font-weight: 800;
+}
+.as-small {
+  font-size: 13.5px;
+}
+.as-foot {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.as-foot .btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.as-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- الجوال ---------- */
+@media (max-width: 900px) {
+  .proof-layout,
+  .as-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .qc-shell {
+    grid-template-columns: 1fr;
+  }
+  .qc-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    overscroll-behavior-x: contain;
+  }
+  .qc-tabs button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 650px) {
+  .proof-band {
+    padding: 44px 0;
+  }
+  .proof-case {
+    padding: 18px;
+  }
+  .qc-shell,
+  .as-panel {
+    padding: 14px;
+  }
+  .qc-spot {
+    grid-template-columns: 1fr;
+  }
+  .qc-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 21px;
+  }
+  .qc-fields {
+    grid-template-columns: 1fr;
+  }
+  .as-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .as-step {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 8px 4px;
+  }
+  .as-step small {
+    display: none;
+  }
+  .as-step b {
+    font-size: 12.5px;
+  }
+  .as-step span {
+    width: 36px;
+    height: 36px;
+  }
+  .as-foot .btn {
+    width: 100%;
+  }
+}
+
+/* زر ثانوي على خلفية فاتحة */
+.btn.ghost-dark {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--navy);
+}
+.btn.ghost-dark:hover {
+  border-color: var(--turq);
+}
+
+/* أجهزة اللمس: لا رفع للبطاقات عند «التحويم» حتى لا ترتجّ تحت الإصبع */
+@media (hover: none) {
+  .mr-reg-cards > *:hover,
+  .mr-reg-card:hover {
+    transform: none;
+  }
+}
+@media (max-width: 650px) {
+  .qc-icon {
+    display: none;
+  }
+}
