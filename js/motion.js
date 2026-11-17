@@ -52,7 +52,7 @@
   });
 
   /* 2) ميل خفيف وبقعة ضوء على البطاقات */
-  const TILT = ".card, .quick-card, .mr-reg-card, .marji-role, .book-item, .writer-card, .member, .gap-item, .quiz-card, .source-trigger.resource";
+  const TILT = ".card, .quick-card, .mr-reg-card, .marji-role, .book-item, .writer-card, .member, .gap-item, .as-panel, .source-trigger.resource";
   $$(TILT).forEach((c) => {
     c.classList.add("tilt");
     let f = 0;
