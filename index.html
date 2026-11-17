@@ -11,13 +11,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ar_SA" />
     <link rel="icon" type="image/png" href="assets/mark.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/sections.css" />
     <link rel="stylesheet" href="css/upgrade.css" />
     <link rel="stylesheet" href="css/intro.css" />
+    <link rel="stylesheet" href="css/v3.css" />
   </head>
   <body>
     <a class="skip-link" href="#home">تخطَّ إلى المحتوى</a>
@@ -38,7 +37,7 @@
           <a aria-label="تجنّب المخالفة" data-rail="prevention" href="#prevention"><span class="rail-dot"></span><span>الوقاية</span></a>
           <a aria-label="الأخلاقيات المهنية" data-rail="ethics" href="#ethics"><span class="rail-dot"></span><span>الأخلاقيات</span></a>
           <a aria-label="التدريب على المواقف" data-rail="practice" href="#practice"><span class="rail-dot"></span><span>التدريب</span></a>
-          <a aria-label="اختبر فهمك" data-rail="quiz" href="#quiz"><span class="rail-dot"></span><span>الاختبار</span></a>
+          <a aria-label="قياس أثر التعلّم" data-rail="quiz" href="#quiz"><span class="rail-dot"></span><span>قياس الأثر</span></a>
           <a aria-label="المكتبة" data-rail="library" href="#library"><span class="rail-dot"></span><span>المكتبة</span></a>
           <a aria-label="مقالات الأعضاء" data-rail="writers" href="#writers"><span class="rail-dot"></span><span>المقالات</span></a>
           <a aria-label="المجتمع" data-rail="members" href="#members"><span class="rail-dot"></span><span>المجتمع</span></a>
@@ -61,8 +60,8 @@
             <span class="eyebrow">منصة سعودية مستقلة للمعرفة الإعلامية</span>
             <h1>الأنظمة متاحة.<br /><em>ومعرفة تطبيقها تصنع الفارق.</em></h1>
             <p>
-              مَرْجِع منصة سعودية مستقلة ومجانية تساعد الإعلاميين والمصورين وصنّاع المحتوى على فهم الأنظمة الإعلامية من مصادرها الرسمية، ثم تطبيق ما تعلموه من خلال مواقف
-              واختبارات قصيرة.
+              مَرْجِع منصة سعودية مستقلة ومجانية، تساعد الصحفيين والمصورين وصنّاع المحتوى على تحويل الضوابط الإعلامية إلى خطوات عملية قبل النشر، عبر شروح موثقة
+              ومواقف تطبيقية واختبارات قصيرة.
             </p>
             <div class="actions"><a class="btn primary" href="#regulations">ابدأ بفهم الأنظمة ←</a><a class="btn secondary" href="#prevention">تجنّب المخالفة</a><button class="btn ghost" data-open-intro type="button"><span aria-hidden="true" class="play-dot">▶</span> التعريف في ٤٥ ثانية</button></div>
             <div class="hero-hint">توعية وتعلّم مهني · لا يحل محل الجهات التنظيمية أو نصوصها الرسمية</div>
@@ -145,18 +144,35 @@
           </div>
         </div>
       </section>
+      <section aria-labelledby="proofTitle" class="proof-band" id="evidence">
+        <div class="wrap proof-layout">
+          <div class="proof-copy reveal">
+            <span class="proof-eyebrow">لماذا نحتاج أداة وقائية؟</span>
+            <h2 id="proofTitle">مخالفات واقعية.. وإجراءات يمكن مراجعتها قبل النشر</h2>
+            <p>وجود مخالفة في مؤسسة إعلامية لا يعني بالضرورة جهل العاملين بالأنظمة؛ فقد يتعلق الأمر أيضًا بالإجراءات أو التحقق من الحقوق. لذلك يركّز مَرْجِع على <strong>القرار المهني قبل النشر</strong>، لا على افتراض أن الممارس لا يعرف الأنظمة.</p>
+          </div>
+          <article aria-labelledby="proofCaseTitle" class="proof-case reveal">
+            <span class="proof-label">حالة منشورة · الهيئة السعودية للملكية الفكرية</span>
+            <h3 id="proofCaseTitle">حقوق الصور في مؤسسة صحفية</h3>
+            <p>أعلنت الهيئة السعودية للملكية الفكرية التشهير بمؤسسة صحفية استخدمت صورة مملوكة للغير وعدّلت عليها ونشرتها دون موافقة صاحبها.</p>
+            <div class="proof-lesson"><strong>الدرس الوقائي</strong><span>تحقّق من ملكية الصورة وشروط استخدامها، واحتفظ بما يثبت الإذن قبل اعتمادها.</span></div>
+            <button class="btn primary" data-open-case type="button">اقرأ تفاصيل الحالة ←</button>
+            <small>الحالة تثبت وقوع مخالفة منشورة، ولا تثبت وحدها سبب وقوعها.</small>
+          </article>
+        </div>
+      </section>
       <section class="section" id="start">
         <div class="wrap">
           <div class="section-head reveal">
             <div class="kicker">ابدأ من هنا</div>
             <h2>محتوى أقل.. فهم أكثر</h2>
-            <p class="lead">بدل أن تقرأ صفحات طويلة: نبدأ بالمفهوم، ثم موقف من واقع العمل، ثم سؤال يساعدك تتأكد من فهمك.</p>
+            <p class="lead">بدل أن تقرأ صفحات طويلة: نبدأ بالمفهوم، ثم موقف من واقع العمل، ثم سؤال يساعدك تتأكد من فهمك. الهدف: القرار الصحيح قبل النشر، وليس حفظ النصوص أو الادعاء بأن جميع الممارسين يجهلون الأنظمة.</p>
           </div>
           <div class="grid3 services">
                 <a class="card reveal" href="#regulations"><div class="ic" aria-hidden="true">§</div><h3>افهم اللائحة</h3><p>شرح، مثال، سؤال، ثم المادة وصفحتها.</p><span class="more">١٤ موضوعًا ←</span></a>
                 <a class="card reveal" href="#prevention"><div class="ic" aria-hidden="true">⛨</div><h3>تجنّب المخالفة</h3><p>ما الذي تراجعه قبل النشر أو مزاولة النشاط.</p><span class="more">٣٠ بندًا من جدول المخالفات ←</span></a>
                 <a class="card reveal" href="#ethics"><div class="ic" aria-hidden="true">◈</div><h3>الأخلاقيات المهنية</h3><p>مبادئ المهنة في مواقف من غرفة الأخبار.</p><span class="more">٩ مواقف ←</span></a>
-                <a class="card reveal" href="#practice"><div class="ic" aria-hidden="true">✦</div><h3>تدرّب واختبر</h3><p>ثلاثة قرارات تحريرية، ثم اختبار قبل التعلّم وبعده.</p><span class="more">ابدأ التدريب ←</span></a>
+                <a class="card reveal" href="#practice"><div class="ic" aria-hidden="true">✦</div><h3>تدرّب واختبر</h3><p>ثلاثة قرارات تحريرية، ثم قياس قرارك قبل التعلّم وبعده.</p><span class="more">٣ مواقف + ٥ قبل و٥ بعد ←</span></a>
                 <a class="card reveal" href="#library"><div class="ic" aria-hidden="true">▤</div><h3>مكتبة الكتب</h3><p>كتب سعودية مجانية متخصصة في الإعلام.</p><span class="more">تصفّح المكتبة ←</span></a>
                 <a class="card reveal" href="#writers"><div class="ic" aria-hidden="true">✎</div><h3>المقالات والمجتمع</h3><p>خبرات الأعضاء وملفاتهم المهنية.</p><span class="more">اقرأ وتعرّف ←</span></a>
               </div>
@@ -290,6 +306,33 @@
                   <div><b>الملحق (ب): جدول المخالفات</b><small>٣٠ بندًا · صفحات الملحق ٢–٦ (٥١–٥٥ من ملف اللائحة)</small></div>
                 </div>
               </div>
+              <div class="qc-block reveal" id="quickChecks">
+                <div class="qc-title"><h3>ابدأ بالأشيع: ٦ مراجعات سريعة قبل النشر</h3><p>أمثلة إرشادية، وليست حكمًا آليًا بوقوع مخالفة.</p></div>
+                <div class="qc-shell">
+                  <div aria-label="اختر الموقف المهني" class="qc-tabs" role="group">
+                    <button aria-pressed="true" data-qc="0" type="button">حقوق الصور</button>
+                    <button aria-pressed="false" data-qc="1" type="button">خبر عن قرار رسمي</button>
+                    <button aria-pressed="false" data-qc="2" type="button">محتوى إعلاني</button>
+                    <button aria-pressed="false" data-qc="3" type="button">نشاط إعلامي جديد</button>
+                    <button aria-pressed="false" data-qc="4" type="button">نقل محتوى صحفي</button>
+                    <button aria-pressed="false" data-qc="5" type="button">تصحيح خطأ منشور</button>
+                  </div>
+                  <div aria-live="polite" class="qc-spot">
+                    <div aria-hidden="true" class="qc-icon" id="qcIcon">▧</div>
+                    <div>
+                      <div class="qc-meta"><span id="qcGroup"></span><b id="qcCount"></b></div>
+                      <h4 id="qcHeading"></h4>
+                      <div class="qc-fields">
+                        <div class="qc-field qc-risk"><small>الخطأ المحتمل</small><p id="qcRisk"></p></div>
+                        <div class="qc-field qc-act"><small>ما الذي تفعله قبل النشر؟</small><p id="qcAction"></p></div>
+                      </div>
+                      <div class="qc-check"><strong>فحص سريع</strong><span id="qcCheck"></span></div>
+                      <p class="qc-source" id="qcSource"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="pv-detail-title reveal">الدليل التفصيلي: ٣٠ بندًا من جدول المخالفات</h3>
               <div class="pv-flow reveal" aria-hidden="true"><span>النشاط المعني</span><i>←</i><span>السلوك الذي تتجنبه</span><i>←</i><span>راجع قبل أن تبدأ</span><i>←</i><span>موقف واختبار</span><i>←</i><span>السند والصفحة</span></div>
               <div class="mr-reg-shell reveal">
                 <div class="mr-reg-search">
@@ -472,39 +515,27 @@
               </div>
         </div>
       </section>
-      <section class="section quiz-section" id="quiz">
+      <section aria-labelledby="asTitle" class="section quiz-section" id="quiz">
             <div class="wrap">
               <div class="section-head reveal">
-                <div class="kicker">اختبر فهمك</div>
-                <h2>قِس فهمك قبل التعلّم.. وبعده</h2>
-                <p class="lead">خمسة أسئلة قصيرة. أجب الآن، ثم أعد الاختبار بعد تصفّح المنصة وقارن النتيجتين.</p>
+                <div class="kicker">قابلية القياس</div>
+                <h2 id="asTitle">هل تغيّر قرارك بعد التعلّم؟</h2>
+                <p class="lead">بدل سؤال الممارس «هل تفهم اللائحة؟»، نعرض خمسة مواقف قبل الشرح، ثم خمسة مواقف مختلفة بعده تغطي الموضوعات نفسها، ونقارن عدد القرارات المهنية الصحيحة.</p>
               </div>
-              <div class="quiz-grid">
-                <article class="quiz-card reveal card-magnet">
-                  <span class="quiz-step">١</span>
-                  <h3>قبل التعلّم</h3>
-                  <p>أجب بما تعرفه الآن دون تحضير.</p>
-                  <div class="quiz-score" id="scorePre"><span class="quiz-score-num">—</span><span class="quiz-score-label">لم يُجرَ بعد</span></div>
-                  <button class="btn primary" data-start-quiz="pre" type="button">ابدأ الاختبار القبلي ←</button>
-                </article>
-                <article class="quiz-card reveal card-magnet">
-                  <span class="quiz-step">٢</span>
-                  <h3>بعد التعلّم</h3>
-                  <p>تصفّح الأنظمة والمواقف، ثم عُد هنا.</p>
-                  <div class="quiz-score" id="scorePost"><span class="quiz-score-num">—</span><span class="quiz-score-label">لم يُجرَ بعد</span></div>
-                  <button class="btn primary" data-start-quiz="post" type="button">ابدأ الاختبار البعدي ←</button>
-                </article>
-                <article class="quiz-card quiz-compare reveal">
-                  <h3>مقارنة النتيجتين</h3>
-                  <div class="quiz-bars" id="quizBars">
-                    <div class="quiz-bar"><span>قبل</span><div class="bar"><i id="barPre"></i></div><b id="barPreN">—</b></div>
-                    <div class="quiz-bar"><span>بعد</span><div class="bar"><i id="barPost"></i></div><b id="barPostN">—</b></div>
-                  </div>
-                  <p class="quiz-verdict" id="quizVerdict" aria-live="polite">أكمل الاختبارين لتظهر المقارنة.</p>
-                  <button class="quiz-reset" id="quizReset" type="button">إعادة ضبط النتائج</button>
-                </article>
+              <div class="as-layout">
+                <ol class="as-steps reveal">
+                  <li class="as-step"><span>٠١</span><div><b>قبل التعلّم</b><small>٥ مواقف دون شرح مسبق</small></div></li>
+                  <li class="as-step"><span>٠٢</span><div><b>تعلّم مختصر</b><small>٥ قواعد عملية</small></div></li>
+                  <li class="as-step"><span>٠٣</span><div><b>بعد التعلّم</b><small>٥ مواقف مختلفة بالصعوبة نفسها</small></div></li>
+                  <li class="as-step"><span>٠٤</span><div><b>المقارنة</b><small>النتيجتان جنبًا إلى جنب</small></div></li>
+                </ol>
+                <div class="as-panel reveal" aria-live="polite">
+                  <div class="as-head"><span id="asStage">اختبار توعوي تجريبي</span><b id="asCounter">جاهز للبدء</b></div>
+                  <div id="asBody"></div>
+                  <div class="as-foot"><button class="btn primary" id="asNext" type="button">ابدأ الاختبار القبلي ←</button><button class="btn ghost-dark" id="asReset" type="button" hidden>إعادة التجربة</button></div>
+                </div>
               </div>
-              <p class="note">النتائج تُحفظ في متصفحك فقط. الأسئلة توعوية عامة وليست اختبارًا معتمدًا.</p>
+              <p class="as-note">النتيجة تظهر داخل متصفحك فقط ولا تُرسل إلى أي خادم. هذه وظيفة قياس تجريبية؛ إثبات أثر المنصة يتطلب تطبيقها على مشاركين حقيقيين وتوثيق المنهجية والنتائج.</p>
             </div>
           </section>
           <section class="section alt" id="library">
@@ -512,7 +543,7 @@
           <div class="section-head reveal">
             <div class="kicker">مكتبة مَرْجِع</div>
             <h2>مكتبة إعلامية.. تقرأها من مَرْجِع</h2>
-            <p class="lead">كتب ودراسات سعودية مجانية في الإعلام، ودليلان عمليان من إعداد مَرْجِع. افتح أي كتاب لتقرأ نبذته وموضوعاته داخل المنصة.</p>
+            <p class="lead">كتب سعودية متخصصة في الإعلام، ودليلان عمليان من إعداد مَرْجِع. افتح أي كتاب لتقرأ نبذته وموضوعاته داخل المنصة. بعض الكتب متاح مجانًا لدى ناشره، ولا يعني ذلك السماح بنسخها أو إعادة استضافتها دون إذن.</p>
           </div>
           <div class="book-grid">
             <article class="book-item reveal card-magnet">
@@ -686,7 +717,7 @@
           <div class="section-head reveal">
             <div class="kicker">مجتمع مَرْجِع</div>
             <h2>خبرات متنوعة، ومساحة واحدة للتعلّم</h2>
-            <p class="lead">صحفيون ومحررون ومصورون وصنّاع محتوى. افتح أي بطاقة لعرض الملف المهني.</p>
+            <p class="lead">بطاقات تعريفية تجريبية تبيّن تصور المجتمع المهني؛ افتح أي بطاقة لعرض الملف المهني.</p>
                 <p class="sample-flag"><span>عيّنات تجريبية</span> الأسماء والصور وحالات التوثيق أمثلة افتراضية، والصور مولّدة بالذكاء الاصطناعي. لا يوجد تسجيل أو توثيق فعلي في هذه النسخة.</p>
           </div>
           <div aria-label="تصفية الأعضاء" class="topicbar" role="group">
@@ -834,6 +865,18 @@
               <p>لا. بطاقات الأعضاء في هذا النموذج توضيحية فقط، والتوثيق الفعلي يتطلب آلية تحقق آمنة ونظام عضويات.</p>
             </details>
             <details>
+              <summary>كيف يستفيد مَرْجِع من الذكاء الاصطناعي؟</summary>
+              <p>استُخدمت أدوات ذكاء اصطناعي في إعداد مسودات الصياغة التعليمية وتصميم الأمثلة والسيناريوهات. لا يصدر النموذج أحكامًا قانونية آلية، ولا يُعتمد أي شرح نظامي دون مراجعة بشرية ومطابقة مصدره.</p>
+            </details>
+            <details>
+              <summary>كيف نحافظ على تحديث المحتوى واستمرار المنصة؟</summary>
+              <p>الخطة التشغيلية المقترحة: مراجعة دورية للمحتوى من فريق تحرير، وتسجيل مصدر كل مادة وتاريخ فحصها، وإعادة المراجعة عند صدور تحديث نظامي، واستضافة تقنية منخفضة التكلفة مع إتاحة المحتوى المعرفي مجانًا. هذه خطة مقترحة وليست فريقًا قائمًا حاليًا.</p>
+            </details>
+            <details>
+              <summary>هل ثبت أن مَرْجِع يخفّض المخالفات؟</summary>
+              <p>لم تُجرَ بعد دراسة ميدانية تثبت خفض المخالفات. يتيح النموذج اختبارًا قبليًا وبعديًا لقياس القرار المهني في مواقف افتراضية؛ ويحتاج قياس الأثر الواقعي إلى تطبيق موثق على عينة من الممارسين ومتابعة النتائج.</p>
+            </details>
+            <details>
               <summary>هل الموقع مكتمل للإطلاق؟</summary>
               <p>هذه واجهة تفاعلية تجريبية. التسجيل والنقاشات العامة وقاعدة البيانات والمحتوى النظامي التفصيلي تحتاج إلى تنفيذ ومراجعة قبل الإطلاق.</p>
             </details>
@@ -921,14 +964,16 @@
     </dialog>
 
     <!-- الاختبار -->
-    <dialog aria-labelledby="quizHeading" class="marji-dialog quiz-dialog" id="quizDialog">
+    <dialog aria-labelledby="caseHeading" class="marji-dialog case-dialog" id="caseDialog">
       <button aria-label="إغلاق" class="dialog-close" data-close-dialog type="button">×</button>
-      <span class="dialog-tag" id="quizTag"></span>
-      <div class="quiz-progress"><i id="quizProgress"></i></div>
-      <h2 id="quizHeading"></h2>
-      <div class="quiz-options" id="quizOptions"></div>
-      <p class="quiz-explain" id="quizExplain" aria-live="polite"></p>
-      <div class="quiz-foot"><span id="quizStepText"></span><button class="btn primary" id="quizNext" type="button" hidden>التالي ←</button></div>
+      <span class="dialog-tag">حالة منشورة · حقوق الصور</span>
+      <h2 id="caseHeading">مؤسسة صحفية تنشر صورة مملوكة للغير دون موافقة صاحبها</h2>
+      <div class="case-sec"><h3>ماذا حدث؟</h3><p>أعلنت الهيئة السعودية للملكية الفكرية التشهير بمطابع مؤسسة اليمامة الصحفية (جريدة الرياض)، بعد استخدامها صورة مملوكة للغير ونشرها والتعديل عليها دون الحصول على موافقة صاحبها.</p></div>
+      <div class="case-sec"><h3>العقوبة المعلنة</h3><p>غرامة مالية، وإزالة الصورة محل المخالفة، والتشهير بالمؤسسة على نفقتها في الحسابات الرسمية للهيئة.</p></div>
+      <div class="case-sec"><h3>ما الذي تراجعه قبل أن تنشر صورة؟</h3><ol><li>من صاحب الحق في الصورة؟</li><li>هل لديك إذن أو ترخيص يغطي هذا الاستخدام، بما فيه التعديل؟</li><li>هل احتفظت بما يثبت الإذن قبل النشر؟</li></ol></div>
+      <div class="case-sec"><h3>ما الذي لا تثبته الحالة؟</h3><p>وقوع المخالفة لا يكشف وحده سببها؛ قد يتعلق بالإجراءات أو التحقق من الحقوق، لا بالضرورة بالجهل بالنظام.</p></div>
+      <p class="case-cite">المصدر: إعلان الهيئة السعودية للملكية الفكرية، كما نشرته صحيفة «سبق» الإلكترونية. عُرضت الحالة هنا للتوعية دون نسخ الخبر الأصلي.</p>
+      <div class="case-actions"><button class="btn primary" data-case-to-check type="button">راجع «حقوق الصور» في دليل الوقاية ←</button><button class="btn ghost-dark" data-close-dialog type="button">إغلاق</button></div>
     </dialog>
 
     <!-- السياسة التحريرية والخصوصية -->
@@ -1035,5 +1080,6 @@
     <script src="js/guide.js"></script>
     <script src="js/motion.js"></script>
     <script src="js/intro.js"></script>
+    <script src="js/v3.js"></script>
   </body>
 </html>
