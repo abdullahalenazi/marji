@@ -223,16 +223,13 @@
       $("#pvAvoid").textContent = x.avoid;
       $("#pvWho").textContent = x.who;
       $("#pvSteps").replaceChildren(...x.steps.map((t) => el("li", null, t)));
-      $("#pvExample").textContent = x.ex;
-      $("#pvQuestion").textContent = x.q;
-      quiz($("#pvOptions"), $("#pvFeedback"), x.opts, x.right, x.why);
       $("#pvRef").textContent = "الملحق (ب): جدول المخالفات — البند (" + AR(x.n) + ")";
       $("#pvPage").textContent = "صفحة " + AR(x.ap) + " من الملحق · صفحة " + AR(x.pp) + " من ملف اللائحة";
       $("#pvText").textContent = "«" + x.text + "»";
       const link = $("#pvLink");
       link.replaceChildren();
       if (x.link) link.append(el("b", null, "مادة مرتبطة في اللائحة: "), document.createTextNode(x.link));
-      else link.append(el("em", "review-tag", "قيد المراجعة"), document.createTextNode(" لم نربط هذا البند بمادة محددة في اللائحة بعد؛ السند هو نص البند نفسه."));
+      else link.append(el("b", null, "السند: "), document.createTextNode("نص البند في جدول المخالفات (الملحق ب)."));
       $("#pvF1").textContent = fineCell(x.fine[0]);
       $("#pvF2").textContent = fineCell(x.fine[1]);
       $("#pvF3").textContent = fineCell(x.fine[2]);
