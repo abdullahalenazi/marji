@@ -181,7 +181,9 @@
     img.src = m.photo;
     img.alt = "";
     const who = el("span");
-    who.append(el("strong", null, m.name), el("small", null, m.role));
+    const nm = el("strong", null, m.name);
+    if (m.verified) nm.insertAdjacentHTML("beforeend", " " + BADGE);
+    who.append(nm, el("small", null, m.role));
     btn.append(img, who);
     btn.addEventListener("click", () => {
       ad.close();
@@ -201,7 +203,7 @@
     $("#memberRole").textContent = m.role;
     $("#memberBio").textContent = m.bio;
     const badge = $("#memberBadge");
-    badge.innerHTML = "";
+    badge.innerHTML = m.verified ? '<span class="status yes">' + BADGE + " مسجّل مهنيًا لدى الهيئة العامة لتنظيم الإعلام</span><small class=\"gm-note\">يتحقق مَرْجِع من رقم التسجيل قبل منح العلامة.</small>" : "";
     $(".member-dialog .sample-ribbon").hidden = !m.sample;
     $(".profile-sub").textContent = (m.pronoun === "f" ? "مقالاتها" : "مقالاته") + " في مَرْجِع";
     $("#memberTags").replaceChildren(...m.tags.map((t) => el("span", null, t)));
