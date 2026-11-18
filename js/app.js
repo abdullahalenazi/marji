@@ -88,6 +88,7 @@
 
   /* ---------- التدريب على المواقف ---------- */
   (function scenarios() {
+    if (!$("#scenarioTitle")) return; // قسم المواقف الثلاثة دُمج في «تدرّب وقِس أثرك»
     const list = DATA.scenarios;
     const title = $("#scenarioTitle"),
       text = $("#scenarioText"),
@@ -180,7 +181,7 @@
     img.src = m.photo;
     img.alt = "";
     const who = el("span");
-    who.append(el("strong", null, m.name), el("small", null, m.role + (m.sample ? " · عضوية تجريبية" : "")));
+    who.append(el("strong", null, m.name), el("small", null, m.role));
     btn.append(img, who);
     btn.addEventListener("click", () => {
       ad.close();
@@ -200,7 +201,7 @@
     $("#memberRole").textContent = m.role;
     $("#memberBio").textContent = m.bio;
     const badge = $("#memberBadge");
-    badge.innerHTML = m.verified ? '<span class="status yes">' + BADGE + " موثّق لدى مَرْجِع" + (m.sample ? " (تجريبي)" : "") + "</span>" : '<span class="status no">غير موثّق</span>';
+    badge.innerHTML = "";
     $(".member-dialog .sample-ribbon").hidden = !m.sample;
     $(".profile-sub").textContent = (m.pronoun === "f" ? "مقالاتها" : "مقالاته") + " في مَرْجِع";
     $("#memberTags").replaceChildren(...m.tags.map((t) => el("span", null, t)));
