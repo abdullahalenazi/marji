@@ -541,169 +541,209 @@
   }
 }
 
-/* ---------- تشخيص التحدي ---------- */
-.dx .gap-heading {
-  margin-bottom: 30px;
+/* ---------- أيقونات الواجهة (SVG) ---------- */
+.quick-icon .ui-ic,
+.lib-ic .ui-ic,
+.qc-icon svg {
+  width: 24px;
+  height: 24px;
 }
-.dx-sub {
-  margin: 0 0 14px;
-  font-size: 17px;
-  font-weight: 800;
-  color: #4b6276;
-}
-.dx-criteria {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 40px;
-}
-.dx-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 22px 20px 20px;
-  background: #fff;
-  border: 1px solid #dcecef;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px #082d4d08;
-}
-.dx-ic {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--c) 12%, #fff);
-  color: var(--c);
-  font-size: 18px;
-  font-weight: 900;
-}
-.dx-card h4 {
-  margin: 4px 0 0;
-  font-size: 19px;
-  color: var(--c);
-}
-.dx-card p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.75;
-  color: #4b6276;
-}
-.dx-link {
-  margin-top: auto;
-  padding: 4px 0 0;
-  border: 0;
-  background: none;
-  color: var(--c);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: none;
-}
-.dx-link:hover {
-  text-decoration: underline;
-}
-.dx-levels {
+
+/* ---------- المكتبة: بطاقات مختصرة ---------- */
+.lib-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 34px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.dx-level {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
   gap: 14px;
-  padding: 20px;
+}
+.lib-card {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
   background: #fff;
-  border: 1px solid #dcecef;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px #082d4d08;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 8px 26px #082d4d08;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.dx-level:not(:last-child)::after {
-  content: "‹";
-  position: absolute;
-  top: 50%;
-  left: -24px;
-  transform: translateY(-50%);
-  color: #0bc6b2;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1;
+.lib-card:hover {
+  border-color: #9fdcd3;
+  box-shadow: 0 12px 30px #082d4d14;
 }
-.dx-n {
-  flex: 0 0 auto;
-  font-size: 40px;
-  line-height: 1;
-  font-weight: 900;
-  color: #0bc6b2;
-}
-.dx-level small {
-  display: block;
-  color: #7b8b99;
-  font-size: 13px;
-  font-weight: 700;
-}
-.dx-level h4 {
-  margin: 2px 0 6px;
-  font-size: 19px;
-  color: #0b2b4b;
-}
-.dx-level p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #4b6276;
-}
-.dx-level.is-core {
-  background: #071d3b;
-  border-color: #071d3b;
-}
-.dx-level.is-core h4 {
-  color: #fff;
-}
-.dx-level.is-core p {
-  color: #c8dbe6;
-}
-.dx-level.is-core small,
-.dx-level.is-core .dx-n {
+.lib-ic {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(140deg, #0c2b50, #0a4a63);
   color: #62f1df;
 }
+.lib-body {
+  min-width: 0;
+}
+.lib-cat {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #087f74;
+}
+.lib-body h3 {
+  margin: 2px 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--navy);
+}
+.lib-body p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.lib-open {
+  align-self: center;
+  border: 1px solid #c8e9e4;
+  background: #ecfaf7;
+  color: #087f74;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.lib-open:hover {
+  background: #0bc6b2;
+  border-color: #0bc6b2;
+  color: #04243b;
+}
+
+/* ---------- ملخص المنصة (آخر الموقع) ---------- */
+.sum-section {
+  padding: 64px 0 72px;
+  background: #f3f7fa;
+}
+.sum-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 36px;
+  align-items: center;
+  padding: 44px;
+  border-radius: 34px;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(circle at 6% 92%, rgba(11, 198, 178, 0.35), transparent 34%), linear-gradient(120deg, #071d3b 0%, #0b3557 60%, #0c4a62 100%);
+  box-shadow: 0 30px 70px rgba(7, 29, 59, 0.22);
+}
+.sum-card > * {
+  min-width: 0;
+}
+.sum-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(98, 241, 223, 0.35);
+  color: #62f1df;
+  font-size: 13.5px;
+  font-weight: 800;
+}
+.sum-copy h2 {
+  margin: 16px 0 12px;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.3;
+}
+.sum-copy p {
+  margin: 0 0 22px;
+  color: #c8dbe6;
+  font-size: 16.5px;
+  line-height: 1.9;
+}
+.sum-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: #071d3b;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.sum-btn:hover {
+  transform: translateY(-2px);
+}
+.sum-table {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+}
+.sum-table > strong {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+.sum-table > div {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.sum-table span {
+  color: #9fc3d2;
+  font-size: 14px;
+}
+.sum-table b {
+  font-size: 15px;
+  line-height: 1.6;
+}
 @media (max-width: 980px) {
-  .dx-criteria {
+  .lib-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-@media (max-width: 850px) {
-  .dx-levels {
+  .sum-card {
     grid-template-columns: 1fr;
-    gap: 26px;
-  }
-  .dx-level:not(:last-child)::after {
-    content: "⌄";
-    top: auto;
-    bottom: -26px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 22px;
+    padding: 30px;
   }
 }
-@media (max-width: 520px) {
-  .dx-criteria {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+@media (max-width: 650px) {
+  .lib-grid {
+    grid-template-columns: 1fr;
   }
-  .dx-card {
-    padding: 16px 14px;
+  .sum-section {
+    padding: 44px 0 52px;
   }
-  .dx-card h4 {
-    font-size: 16px;
+  .sum-card {
+    padding: 22px;
+    border-radius: 24px;
+    gap: 22px;
   }
-  .dx-card p {
-    font-size: 13.5px;
+  .sum-table {
+    padding: 14px;
   }
+  .sum-table > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .sum-btn {
+    display: block;
+    text-align: center;
+  }
+}
+.quick-card .quick-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: #e3f7f4;
+  color: #087f74;
+  line-height: 1;
 }
