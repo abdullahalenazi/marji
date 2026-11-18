@@ -747,3 +747,24 @@
   color: #087f74;
   line-height: 1;
 }
+
+/* علامة التسجيل المهني لدى الهيئة العامة لتنظيم الإعلام */
+.mini-author-text strong .verified-icon,
+.article-author-link strong .verified-icon {
+  width: 16px;
+  height: 16px;
+  color: #1d9bf0;
+  vertical-align: -3px;
+  margin-inline-start: 2px;
+}
+#memberBadge .status.yes {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#memberBadge .gm-note {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
