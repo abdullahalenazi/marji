@@ -1,5 +1,5 @@
-/* مَرْجِع — شعار من نقاط في الواجهة الأولى
-   تتجمّع النقاط لتكوّن الشعار، وتتفرّق بهدوء حول المؤشر ثم تعود لمكانها،
+/* مَرْجِع — الشعار وكلمة «مَرْجِع» من نقاط في الواجهة الأولى
+   تتجمّع النقاط لتكوّن الشعار والكلمة، وتتفرّق بهدوء حول المؤشر ثم تعود لمكانها،
    مع ومضة ضوء تعبر الشعار كل بضع ثوانٍ. */
 (() => {
   "use strict";
@@ -7,7 +7,9 @@
   if (!cv || !cv.getContext) return;
   const g = cv.getContext("2d");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SRC = "assets/mark.png";
+  const MARK = "assets/mark.png", WORD = "assets/logo.webp";
+  // حدود كلمة «مَرْجِع» داخل ملف الشعار الكامل (دون السطر الصغير تحتها)
+  const WX = 7, WY = 9, WW = 409, WH = 165;
 
   let W = 0, H = 0, dpr = 1, pts = [], born = 0, raf = 0, visible = false, started = false;
   const ptr = { x: -9999, y: -9999, on: false };
@@ -22,23 +24,25 @@
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  // تحويل الشعار إلى نقاط بألوان الهوية
-  function build(img) {
-    const S = Math.min(W, H) * 0.62;
-    const step = W < 340 ? 4 : 4.4;
-    const n = Math.round(S / step);
+  // تحويل الشعار والكلمة إلى نقاط بألوان الهوية
+  function build(mark, word) {
+    const step = W < 340 ? 2.7 : 3.4;
+    const cw = Math.round(W / step), ch = Math.round(H / step);
     const c = document.createElement("canvas");
-    c.width = c.height = n;
+    c.width = cw;
+    c.height = ch;
     const x = c.getContext("2d");
-    const k = Math.min(n / img.width, n / img.height);
-    const iw = img.width * k, ih = img.height * k;
-    x.drawImage(img, (n - iw) / 2, (n - ih) / 2, iw, ih);
-    const d = x.getImageData(0, 0, n, n).data;
-    const ox = (W - S) / 2, oy = (H - S) / 2;
+    // تكوين عمودي: الشعار فوق والكلمة تحته
+    const mh = ch * 0.44, mw = mh * (mark.width / mark.height);
+    const ww = cw * 0.66, wh = ww * (WH / WW);
+    const gap = ch * 0.05, top = (ch - (mh + gap + wh)) / 2;
+    x.drawImage(mark, (cw - mw) / 2, top, mw, mh);
+    x.drawImage(word, WX, WY, WW, WH, (cw - ww) / 2, top + mh + gap, ww, wh);
+    const d = x.getImageData(0, 0, cw, ch).data;
     const out = [];
-    for (let j = 0; j < n; j++)
-      for (let i = 0; i < n; i++) {
-        const o = (j * n + i) * 4, a = d[o + 3];
+    for (let j = 0; j < ch; j++)
+      for (let i = 0; i < cw; i++) {
+        const o = (j * cw + i) * 4, a = d[o + 3];
         if (a < 110) continue;
         const r = d[o], gg = d[o + 1], b = d[o + 2];
         const lum = (0.3 * r + 0.59 * gg + 0.11 * b) / 255;
@@ -47,13 +51,13 @@
         if (lum < 0.28) col = [70, 160, 240];
         else if (gg > r + 40) col = lum > 0.55 ? [143, 249, 228] : [24, 214, 196];
         else col = [120, 200, 255];
-        const hx = ox + (i + 0.5) * (S / n), hy = oy + (j + 0.5) * (S / n);
+        const hx = (i + 0.5) * step, hy = (j + 0.5) * step;
         const ang = Math.random() * Math.PI * 2, rad = Math.max(W, H) * (0.45 + Math.random() * 0.4);
         out.push({
           hx, hy,
           x: W / 2 + Math.cos(ang) * rad, y: H / 2 + Math.sin(ang) * rad,
           vx: 0, vy: 0,
-          col, s: 1.25 + Math.random() * 0.95,
+          col, s: 1.15 + Math.random() * 0.8,
           ph: Math.random() * 6.28, dl: Math.random() * 0.9 + (Math.hypot(hx - W / 2, hy - H / 2) / W) * 0.6,
         });
       }
@@ -121,13 +125,12 @@
     if (started) return;
     started = true;
     size();
-    const img = new Image();
-    img.onload = () => {
-      pts = build(img);
+    const load = (src) => new Promise((ok, no) => { const im = new Image(); im.onload = () => ok(im); im.onerror = no; im.src = src; });
+    Promise.all([load(MARK), load(WORD)]).then(([m, w]) => {
+      pts = build(m, w);
       born = performance.now();
       kick();
-    };
-    img.src = SRC;
+    }, () => {});
   }
 
   new IntersectionObserver((es) => {
