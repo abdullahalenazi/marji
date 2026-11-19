@@ -791,3 +791,17 @@
     height: 300px;
   }
 }
+/* بداية العرض التعريفي: الشعار والكلمة من نقاط */
+.scene-gate .gate-dots {
+  display: block;
+  width: 320px;
+  height: 260px;
+  max-width: 78vw;
+  margin: -10px auto 0;
+}
+@media (max-width: 640px), (max-height: 640px) {
+  .scene-gate .gate-dots {
+    width: 220px;
+    height: 180px;
+  }
+}
