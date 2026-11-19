@@ -217,12 +217,14 @@
   addEventListener("pointerup", endDrag);
   addEventListener("pointercancel", endDrag);
 
-  /* ---------- غبار ضوئي بعمق ---------- */
+  /* ---------- شبكة نقاط متصلة في الخلفية ---------- */
   const cv = $("#introDust"),
     g = cv.getContext("2d");
   let dots = [],
     W = 0,
-    H = 0;
+    H = 0,
+    LINK = 140;
+  const mp = { x: -999, y: -999 };
   function sizeDust() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     W = cv.clientWidth;
@@ -230,25 +232,77 @@
     cv.width = W * dpr;
     cv.height = H * dpr;
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.round(Math.min(90, (W * H) / 16000));
-    dots = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, z: 0.2 + Math.random() * 0.8, p: Math.random() * 6.28 }));
+    LINK = W < 700 ? 105 : 140;
+    const n = Math.round(Math.max(36, Math.min(110, (W * H) / 13000)));
+    dots = Array.from({ length: n }, () => {
+      const a = Math.random() * 6.283,
+        sp = 6 + Math.random() * 12;
+      return { x: Math.random() * W, y: Math.random() * H, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, z: 0.35 + Math.random() * 0.65, p: Math.random() * 6.28 };
+    });
   }
   function dust(dt) {
     g.clearRect(0, 0, W, H);
+    const P = [];
     for (const d of dots) {
-      d.p += dt * 0.6;
-      d.y -= dt * 9 * d.z;
-      if (d.y < -4) d.y = H + 4;
-      const x = d.x + wy * d.z * 3.2,
-        y = d.y - wx * d.z * 3.2;
-      g.globalAlpha = (0.18 + 0.22 * Math.sin(d.p)) * d.z + 0.08;
-      g.fillStyle = d.z > 0.7 ? "#7ff5e6" : "#8fc8e8";
+      d.p += dt * 0.8;
+      d.x += d.vx * dt;
+      d.y += d.vy * dt;
+      if (d.x < -20) d.x = W + 20;
+      else if (d.x > W + 20) d.x = -20;
+      if (d.y < -20) d.y = H + 20;
+      else if (d.y > H + 20) d.y = -20;
+      P.push([d.x + wy * d.z * 3.2, d.y - wx * d.z * 3.2, d]);
+    }
+    // الخطوط بين النقاط القريبة
+    g.lineWidth = 0.7;
+    for (let i = 0; i < P.length; i++)
+      for (let j = i + 1; j < P.length; j++) {
+        const dx = P[i][0] - P[j][0],
+          dy = P[i][1] - P[j][1],
+          dd = dx * dx + dy * dy;
+        if (dd > LINK * LINK) continue;
+        g.globalAlpha = (1 - Math.sqrt(dd) / LINK) * 0.34;
+        g.strokeStyle = "#5fd8e6";
+        g.beginPath();
+        g.moveTo(P[i][0], P[i][1]);
+        g.lineTo(P[j][0], P[j][1]);
+        g.stroke();
+      }
+    // خطوط تصل المؤشر بالنقاط القريبة منه
+    const ML = LINK * 1.25;
+    for (const [x, y] of P) {
+      const dx = x - mp.x,
+        dy = y - mp.y,
+        dd = dx * dx + dy * dy;
+      if (dd > ML * ML) continue;
+      g.globalAlpha = (1 - Math.sqrt(dd) / ML) * 0.45;
+      g.strokeStyle = "#62f1df";
       g.beginPath();
-      g.arc(x, y, d.z * 2.1, 0, 6.283);
+      g.moveTo(x, y);
+      g.lineTo(mp.x, mp.y);
+      g.stroke();
+    }
+    // النقاط
+    for (const [x, y, d] of P) {
+      g.globalAlpha = (0.45 + 0.35 * Math.sin(d.p)) * d.z + 0.12;
+      g.fillStyle = d.z > 0.75 ? "#7ff5e6" : "#8fc8e8";
+      g.beginPath();
+      g.arc(x, y, 0.8 + d.z * 1.6, 0, 6.283);
       g.fill();
     }
     g.globalAlpha = 1;
   }
+  root.addEventListener("pointermove", (e) => {
+    const r = cv.getBoundingClientRect();
+    mp.x = e.clientX - r.left;
+    mp.y = e.clientY - r.top;
+  });
+  root.addEventListener("pointerleave", () => {
+    mp.x = mp.y = -999;
+  });
+  root.addEventListener("pointerup", (e) => {
+    if (e.pointerType !== "mouse") mp.x = mp.y = -999;
+  });
   addEventListener("resize", () => open && sizeDust());
 
   /* ---------- فتح وإغلاق ---------- */
