@@ -154,7 +154,7 @@
   color: var(--muted);
 }
 .pj-steps li::before {
-  content: counter(s, arabic-indic);
+  content: counter(s, decimal);
   position: absolute;
   right: 14px;
   top: 14px;
@@ -652,7 +652,7 @@
   border: 1px solid #ffffff1f;
 }
 .pj-post ol li::before {
-  content: counter(q, arabic-indic);
+  content: counter(q, decimal);
   width: 26px;
   height: 26px;
   flex: none;
@@ -716,7 +716,7 @@
   color: #c7d9e6;
 }
 .pj-info li::before {
-  content: counter(c, arabic-indic);
+  content: counter(c, decimal);
   position: absolute;
   right: 12px;
   top: 50%;
