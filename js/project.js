@@ -12,13 +12,19 @@
     });
   }
   // يظهر المشغّل فقط إذا كان الملف مرفوعًا، وإلا يبقى الوصف النصي
+  // data-src قد يحمل أكثر من مسار مفصولة بـ | ويُستخدم أول ملف متاح منها
   document.querySelectorAll("video[data-src], audio[data-src]").forEach((m) => {
-    fetch(m.dataset.src, { method: "HEAD" }).then((r) => {
-      if (!r.ok) return;
-      m.src = m.dataset.src;
-      m.hidden = false;
-      const fb = m.parentElement.querySelector(".pj-video-fallback");
-      if (fb) fb.hidden = true;
-    }, () => {});
+    const list = m.dataset.src.split("|");
+    const tryNext = (i) => {
+      if (i >= list.length) return;
+      fetch(list[i], { method: "HEAD" }).then((r) => {
+        if (!r.ok) return tryNext(i + 1);
+        m.src = list[i];
+        m.hidden = false;
+        const fb = m.parentElement.querySelector(".pj-video-fallback");
+        if (fb) fb.hidden = true;
+      }, () => tryNext(i + 1));
+    };
+    tryNext(0);
   });
 })();
