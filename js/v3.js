@@ -1,9 +1,9 @@
-/* مَرْجِع — إضافات تحديث ١٧ نوفمبر: الحالة الموثقة، المراجعات السريعة قبل النشر، وقياس أثر التعلّم (قبلي/بعدي) */
+/* مَرْجِع — إضافات تحديث 17 نوفمبر: الحالة الموثقة، المراجعات السريعة قبل النشر، وقياس أثر التعلّم (قبلي/بعدي) */
 (() => {
   "use strict";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const AR = (n) => String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  const AR = (n) => String(n).replace(/\d/g, (d) => "0123456789"[d]);
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const store = {
     get(k, f) {
@@ -21,7 +21,7 @@
     },
   };
 
-  /* ---------- ١) الحالة الموثقة: تُقرأ داخل الموقع فقط ---------- */
+  /* ---------- 1) الحالة الموثقة: تُقرأ داخل الموقع فقط ---------- */
   const caseDlg = $("#caseDialog");
   $$("[data-open-case]").forEach((b) => b.addEventListener("click", () => caseDlg && caseDlg.showModal()));
   $$("[data-case-to-check]").forEach((b) =>
@@ -33,7 +33,7 @@
     })
   );
 
-  /* ---------- ٢) ست مراجعات سريعة قبل النشر ---------- */
+  /* ---------- 2) ست مراجعات سريعة قبل النشر ---------- */
   const CHECKS = [
     {
       icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
@@ -107,7 +107,7 @@
   qcTabs.forEach((b) => b.addEventListener("click", () => showCheck(Number(b.dataset.qc))));
   showCheck(0);
 
-  /* ---------- ٣) قياس أثر التعلّم: ٥ مواقف قبل الشرح، ثم ٥ مواقف مختلفة بعده ---------- */
+  /* ---------- 3) قياس أثر التعلّم: 5 مواقف قبل الشرح، ثم 5 مواقف مختلفة بعده ---------- */
   const PRE = [
     { q: "وصلتك صورة لخبر من شخص تعرفه، ولا تعرف شروط إعادة نشرها. ماذا تفعل؟", a: ["أنشرها لأنه أرسلها لي", "أتحقق من إذن الاستخدام وشروطه قبل النشر", "أكتب «صورة متداولة» وأكتفي"], c: 1 },
     { q: "انتشرت صورة شاشة تقول إن قرارًا رسميًا صدر اليوم. ما الإجراء؟", a: ["أتحقق من أصل البيان وتاريخه لدى الجهة المختصة", "أعتمدها لأن حسابًا مشهورًا نشرها", "أعيد نشرها مع عبارة «أنباء»"], c: 0 },
@@ -193,9 +193,9 @@
       body.innerHTML =
         '<h3>النتيجتان داخل تجربتك</h3><div class="as-scores"><div><strong>' +
         AR(pre) +
-        "/٥</strong><span>قبل التعلّم</span></div><div><strong>" +
+        "/5</strong><span>قبل التعلّم</span></div><div><strong>" +
         AR(post) +
-        '/٥</strong><span>بعد التعلّم</span></div></div><p class="as-verdict">' +
+        '/5</strong><span>بعد التعلّم</span></div></div><p class="as-verdict">' +
         (d > 0 ? "تحسّن أداؤك بمقدار " + AR(d) + " إجابة صحيحة." : d === 0 ? "بقي عدد الإجابات الصحيحة ثابتًا؛ راجع الموضوعات التي تحتاج تدريبًا." : "انخفضت النتيجة بمقدار " + AR(-d) + "؛ أعد مراجعة الأمثلة.") +
         "</p>";
       next.hidden = true;
@@ -212,7 +212,7 @@
     counter.textContent = "جاهز للبدء";
     body.innerHTML = "<h3>ابدأ بقرارك الأول</h3><p>اختر التصرف المهني الأقرب لما ستفعله في كل موقف، من دون أن تطّلع على الشرح أولًا. لن تظهر الإجابة الصحيحة حتى نهاية التجربة.</p>";
     const last = store.get(KEY, null);
-    if (last && typeof last.pre === "number") body.innerHTML += '<p class="as-small">آخر نتيجة في هذا المتصفح: ' + AR(last.pre) + "/٥ قبل، و" + AR(last.post) + "/٥ بعد.</p>";
+    if (last && typeof last.pre === "number") body.innerHTML += '<p class="as-small">آخر نتيجة في هذا المتصفح: ' + AR(last.pre) + "/5 قبل، و" + AR(last.post) + "/5 بعد.</p>";
     next.hidden = false;
     next.disabled = false;
     next.textContent = "ابدأ الاختبار القبلي ←";
