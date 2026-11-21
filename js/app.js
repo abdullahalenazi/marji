@@ -5,7 +5,7 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const DATA = window.MARJI;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const AR = (n) => String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  const AR = (n) => String(n).replace(/\d/g, (d) => "0123456789"[d]);
   const el = (tag, cls, text) => {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
